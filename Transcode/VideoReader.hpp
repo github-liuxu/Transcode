@@ -2,47 +2,46 @@
 //  VideoReader.hpp
 //  Transcode
 //
-//  Created by 刘东旭 on 2024/11/16.
+//  Created by 刘东旭 on 2024/11/28.
 //
 
-#ifndef VideoReader_hpp
-#define VideoReader_hpp
+#ifndef CVideoReader_hpp
+#define CVideoReader_hpp
 
 #include <stdio.h>
-#include "LXMessageHandler.hpp"
-#include <queue>
-#include <mutex>
-#include <condition_variable>
-
+#include <string>
+#include <iostream>
+#include <memory>
 extern "C" {
     #include <libavformat/avformat.h>
-    #include <libavutil/imgutils.h>
-    #include <libavutil/samplefmt.h>
-    #include <libavutil/timestamp.h>
     #include <libavcodec/avcodec.h>
-    #include <libavcodec/codec.h>
-    #include <libavutil/frame.h>
+    #include <libswresample/swresample.h>
+    #include <libswscale/swscale.h>
+    #include <libavutil/avutil.h>
+    #include <libavutil/pixdesc.h>
 }
 
-class ConvertWork;
-class VideoReader : public LXMessageHandler {
-    
+class VideoReader {
 public:
-    VideoReader(ConvertWork *work);
+    VideoReader();
     ~VideoReader();
-    void OpenFile(const char * filePath);
-    void Seek(int64_t time);
-    void ReaderNextVideoFrame();
-    AVFrame * GetNextVideoFrame();
-    void exec(LXMessage* message);
-    const char *filePath = nullptr;
+    bool Open(const std::string& filename);
+    void SetRange(int64_t start, int64_t end);
+    void Close();
+    AVFrame* ReadVideoFrame();
+    int GetWidth() const;
+    int GetHeight() const;
+    int64_t GetBitrate();
+    AVRational GetTimeBase() const;
+    int64_t GetDuration() const;
+    bool Seek(int64_t timestamp);
 private:
-    AVFormatContext *fmt_ctx = NULL;
-    AVCodecContext *codecContext = NULL;
-    ConvertWork *work = nullptr;
-    std::queue<AVFrame *> frameQueue;
-    std::mutex mutex;
-    std::condition_variable condition;
+    AVFormatContext* formatContext;
+    AVCodecContext* codecContext;
+    int videoStreamIndex;
+    int64_t bitRate;
+    int64_t m_start, m_end;
 };
 
-#endif /* VideoReader_hpp */
+
+#endif /* CVideoReader_hpp */

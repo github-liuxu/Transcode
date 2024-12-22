@@ -1,5 +1,5 @@
 //
-//  CVideoReader.hpp
+//  VideoReader.hpp
 //  Transcode
 //
 //  Created by 刘东旭 on 2024/11/28.
@@ -18,15 +18,16 @@ extern "C" {
     #include <libswresample/swresample.h>
     #include <libswscale/swscale.h>
     #include <libavutil/avutil.h>
+    #include <libavutil/pixdesc.h>
 }
 
-class CVideoReader {
+class VideoReader {
 public:
-    CVideoReader();
-    ~CVideoReader();
+    VideoReader();
+    ~VideoReader();
     bool open(const std::string& filename);
     void close();
-    AVFrame* readFrame();
+    AVFrame* readVideoFrame();
     int getWidth() const;
     int getHeight() const;
     AVRational getTimeBase() const;

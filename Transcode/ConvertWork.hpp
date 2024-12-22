@@ -10,37 +10,28 @@
 
 #include <stdio.h>
 #include <queue>
-#include "LXMessageHandler.hpp"
-#include "VideoReader.hpp"
-#include "VideoWriter.hpp"
-extern "C" {
-#include <libavutil/frame.h>
-}
+#include "VideoSource.hpp"
+#include "FileWriter.hpp"
 
-class ConvertWork : public LXMessageHandler {
-    
-    class FrameInfo {
-        
-    };
+class ConvertWork : public VideoSourceCallback,
+                    public FileWriterCallback {
     
 public:
     ConvertWork();
+    ~ConvertWork();
     void Convert(const char* filePath, const char *outputPath, int64_t startTime, int64_t endTime);
     void Start();
-    void exec(LXMessage* message);
-    void NotifyVideoFrame(AVFrame *frame);
-    void NotifyVideoFrameRangeEnd();
-    void NotifyVideoFrameEnd();
-    void NotifyWriterFinish();
+    void VideoFramesArrived(std::vector<FrameInfo> frames);
+    void VideoFramesFinish();
+    void WriterFinish(const char *filePath);
 private:
-    VideoReader *videoReader = nullptr;
-    VideoWriter *videoWriter = nullptr;
-    int64_t startTime = 0;
-    int64_t endTime = 0;
+    void WriterToFile(const std::string& filePath, const AVFrame* frame);
+    
     const char *inputPath = NULL;
     const char *outputPath = NULL;
-    std::queue<FrameInfo *> queue;
-    std::queue<FrameInfo *> writerqueue;
+    int64_t m_endTime;
+    VideoSource *videoSource = nullptr;
+    FileWriter *fileWriter = nullptr;
 };
 
 #endif /* ConvertWork_hpp */

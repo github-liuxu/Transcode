@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C88D5102CF25590003920B8 /* VideoWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C88D50E2CF25590003920B8 /* VideoWriter.cpp */; };
-		0C88D5132CF8BDB6003920B8 /* CVideoReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C88D5112CF8BDB6003920B8 /* CVideoReader.cpp */; };
+		0C88D5132CF8BDB6003920B8 /* VideoReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C88D5112CF8BDB6003920B8 /* VideoReader.cpp */; };
 		0C922A2C2CE8D7D00059575D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C922A2B2CE8D7D00059575D /* main.cpp */; };
 		0C922AC42CE8DB610059575D /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C922ABB2CE8DB610059575D /* libavutil.a */; };
 		0C922AC52CE8DB610059575D /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C922ABC2CE8DB610059575D /* libavfilter.a */; };
@@ -28,9 +28,10 @@
 		0C922ADD2CE8E0BE0059575D /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C922ADC2CE8E0BE0059575D /* libbz2.tbd */; };
 		0C922ADF2CE8E23E0059575D /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C922ADE2CE8E23E0059575D /* CoreFoundation.framework */; };
 		0C922AE92CE8EA0A0059575D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C922AE82CE8EA0A0059575D /* Security.framework */; };
-		0C922AEC2CE8EB490059575D /* VideoReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C922AEA2CE8EB490059575D /* VideoReader.cpp */; };
 		0CD05E552CE8FE5800109E9F /* ConvertWork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CD05E532CE8FE5800109E9F /* ConvertWork.cpp */; };
 		0CD05E582CEA3B2800109E9F /* LXMessageHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CD05E572CEA3B2800109E9F /* LXMessageHandler.cpp */; };
+		0CDE47EC2D15E464009FE536 /* VideoSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CDE47EA2D15E464009FE536 /* VideoSource.cpp */; };
+		0CDE47EF2D15FDA2009FE536 /* FileWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CDE47ED2D15FDA2009FE536 /* FileWriter.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,8 +49,8 @@
 /* Begin PBXFileReference section */
 		0C88D50E2CF25590003920B8 /* VideoWriter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoWriter.cpp; sourceTree = "<group>"; };
 		0C88D50F2CF25590003920B8 /* VideoWriter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VideoWriter.hpp; sourceTree = "<group>"; };
-		0C88D5112CF8BDB6003920B8 /* CVideoReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CVideoReader.cpp; sourceTree = "<group>"; };
-		0C88D5122CF8BDB6003920B8 /* CVideoReader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CVideoReader.hpp; sourceTree = "<group>"; };
+		0C88D5112CF8BDB6003920B8 /* VideoReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoReader.cpp; sourceTree = "<group>"; };
+		0C88D5122CF8BDB6003920B8 /* VideoReader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VideoReader.hpp; sourceTree = "<group>"; };
 		0C922A282CE8D7D00059575D /* Transcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Transcode; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C922A2B2CE8D7D00059575D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0C922A352CE8DB610059575D /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
@@ -201,12 +202,14 @@
 		0C922AE42CE8E6400059575D /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "../../../../usr/local/Cellar/openssl@3/3.3.0/lib/libssl.a"; sourceTree = "<group>"; };
 		0C922AE62CE8E9700059575D /* libcorecrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcorecrypto.tbd; path = usr/lib/system/libcorecrypto.tbd; sourceTree = SDKROOT; };
 		0C922AE82CE8EA0A0059575D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		0C922AEA2CE8EB490059575D /* VideoReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoReader.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
-		0C922AEB2CE8EB490059575D /* VideoReader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VideoReader.hpp; sourceTree = "<group>"; };
 		0CD05E532CE8FE5800109E9F /* ConvertWork.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ConvertWork.cpp; sourceTree = "<group>"; };
-		0CD05E542CE8FE5800109E9F /* ConvertWork.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConvertWork.hpp; sourceTree = "<group>"; };
+		0CD05E542CE8FE5800109E9F /* ConvertWork.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ConvertWork.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		0CD05E562CEA3B2700109E9F /* LXMessageHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LXMessageHandler.hpp; sourceTree = "<group>"; };
 		0CD05E572CEA3B2800109E9F /* LXMessageHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LXMessageHandler.cpp; sourceTree = "<group>"; };
+		0CDE47EA2D15E464009FE536 /* VideoSource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoSource.cpp; sourceTree = "<group>"; };
+		0CDE47EB2D15E464009FE536 /* VideoSource.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VideoSource.hpp; sourceTree = "<group>"; };
+		0CDE47ED2D15FDA2009FE536 /* FileWriter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileWriter.cpp; sourceTree = "<group>"; };
+		0CDE47EE2D15FDA2009FE536 /* FileWriter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileWriter.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,10 +267,12 @@
 				0CD05E562CEA3B2700109E9F /* LXMessageHandler.hpp */,
 				0CD05E532CE8FE5800109E9F /* ConvertWork.cpp */,
 				0CD05E542CE8FE5800109E9F /* ConvertWork.hpp */,
-				0C922AEA2CE8EB490059575D /* VideoReader.cpp */,
-				0C922AEB2CE8EB490059575D /* VideoReader.hpp */,
-				0C88D5112CF8BDB6003920B8 /* CVideoReader.cpp */,
-				0C88D5122CF8BDB6003920B8 /* CVideoReader.hpp */,
+				0CDE47EA2D15E464009FE536 /* VideoSource.cpp */,
+				0CDE47EB2D15E464009FE536 /* VideoSource.hpp */,
+				0CDE47ED2D15FDA2009FE536 /* FileWriter.cpp */,
+				0CDE47EE2D15FDA2009FE536 /* FileWriter.hpp */,
+				0C88D5112CF8BDB6003920B8 /* VideoReader.cpp */,
+				0C88D5122CF8BDB6003920B8 /* VideoReader.hpp */,
 				0C88D50E2CF25590003920B8 /* VideoWriter.cpp */,
 				0C88D50F2CF25590003920B8 /* VideoWriter.hpp */,
 			);
@@ -576,9 +581,10 @@
 			files = (
 				0C88D5102CF25590003920B8 /* VideoWriter.cpp in Sources */,
 				0CD05E582CEA3B2800109E9F /* LXMessageHandler.cpp in Sources */,
-				0C88D5132CF8BDB6003920B8 /* CVideoReader.cpp in Sources */,
-				0C922AEC2CE8EB490059575D /* VideoReader.cpp in Sources */,
+				0C88D5132CF8BDB6003920B8 /* VideoReader.cpp in Sources */,
+				0CDE47EF2D15FDA2009FE536 /* FileWriter.cpp in Sources */,
 				0CD05E552CE8FE5800109E9F /* ConvertWork.cpp in Sources */,
+				0CDE47EC2D15E464009FE536 /* VideoSource.cpp in Sources */,
 				0C922A2C2CE8D7D00059575D /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
