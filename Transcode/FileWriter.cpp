@@ -39,26 +39,31 @@ FileWriter::~FileWriter() {
 
 void FileWriter::exec(LXMessage* message) {
     if (message->id == 100) {
-        while (frames.size() > 0) {
-            FrameInfo info = frames.front();
-            frames.erase(frames.begin());
-            AVFrame* frame = readAVFrameFromFile(info.filePath, m_width, m_height);
-            remove(info.filePath.data());
-            frame->time_base = AV_TIME_BASE_Q;
-            videoWriter->WriterVideoFrame(frame, info.pts);
-            std::cout << "info.pts: " << info.pts << std::endl;
-            av_frame_free(&frame);
-            frame = NULL;
-        }
+        WriterFrames(frames);
     } else if (message->id == 101) {
         videoWriter->WriterTrailer();
     } else if (message->id == 102) {
         LXWriterMessage *m = (LXWriterMessage *)message;
         for (FrameInfo frameInfo : m->frames) {
-            this->frames.push_back(frameInfo);
+            frames.push_back(frameInfo);
         }
-        LXMessage *message = new LXMessage(100);
-        this->PostMessage(message);
+        WriterFrames(frames);
+    }
+}
+
+void FileWriter::WriterFrames(std::vector<FrameInfo> &frames) {
+    while (frames.size() > 0) {
+        FrameInfo info = frames.front();
+        frames.erase(frames.begin());
+        AVFrame* frame = readAVFrameFromFile(info.filePath, m_width, m_height);
+        frame->pts = info.pts;
+        remove(info.filePath.data());
+        if (frame) {
+            videoWriter->WriterVideoFrame(frame, info.pts);
+        }
+        av_freep(&frame[0]);
+        av_frame_free(&frame);
+        frame = NULL;
     }
 }
 

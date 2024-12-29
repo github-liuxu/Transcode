@@ -34,6 +34,7 @@ public:
     void PushFrames(std::vector<FrameInfo> frames);
     void Finish();
 private:
+    void WriterFrames(std::vector<FrameInfo> &frames);
     AVFrame* readAVFrameFromFile(const std::string& filePath, int width, int height);
     FileWriterCallback *callback = nullptr;
     std::vector<FrameInfo> frames;

@@ -53,7 +53,7 @@ void ConvertWork::VideoFramesArrived(std::vector<FrameInfo> frames) {
     size_t size = frames.size();
     for (int i = 0; i < size; i++) {
         FrameInfo info = frames[size - 1 - i];
-        info.pts = m_endTime - info.pts;
+        info.pts = m_endTime - info.pts - info.duration;
         w_frames.push_back(info);
     }
     fileWriter->PushFrames(w_frames);

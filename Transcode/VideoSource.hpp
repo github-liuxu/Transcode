@@ -22,6 +22,7 @@ extern "C" {
 struct FrameInfo {
     std::string filePath;
     int64_t pts;
+    int64_t duration;
 };
 
 struct VideoSourceCallback {

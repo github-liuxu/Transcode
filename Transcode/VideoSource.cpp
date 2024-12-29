@@ -41,16 +41,17 @@ void VideoSource::exec(LXMessage* message) {
     }
     if (message->id == ConvertEventReadFrame) {
         AVFrame *frame = this->videoReader->ReadVideoFrame();
-        if (frameWidth == 0 || frameHeight == 0) {
+        if (frame && (frameWidth == 0 || frameHeight == 0)) {
             frameWidth = frame->width;
             frameHeight = frame->height;
         }
         if (frame != nullptr) {
             std::ostringstream filePath;
             int64_t time = av_rescale_q(frame->pts, videoReader->GetTimeBase(), AV_TIME_BASE_Q);
+            int64_t duration = av_rescale_q(frame->duration, videoReader->GetTimeBase(), AV_TIME_BASE_Q);
             filePath << outputFolderPath << "/frame_" << time << ".yuv";
             WriterToFile(filePath.str(), frame);
-            frames.push_back({filePath.str(), time});
+            frames.push_back({filePath.str(), time, duration});
             av_frame_free(&frame);
             frame = NULL;
             if (isFirstSeek) {

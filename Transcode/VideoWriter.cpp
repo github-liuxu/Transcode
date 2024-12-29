@@ -25,11 +25,10 @@ bool VideoWriter::StartFileWriter(int width, int height, AVRational time_base) {
     rat.num = 1;
     rat.den = 30;
     codecCtx->time_base = rat;
-    codecCtx->gop_size = 15;
+    codecCtx->framerate = (AVRational){23, 1};
+    codecCtx->gop_size = 1;
     codecCtx->pix_fmt = AV_PIX_FMT_YUV420P;
 
-    AVDictionary *opts = NULL;
-    avcodec_open2(codecCtx, codec, &opts);
     AVStream* stream = avformat_new_stream(formatCtx, codec);
     stream->index = 0;
     stream->codecpar->codec_id = codec->id;
@@ -38,17 +37,25 @@ bool VideoWriter::StartFileWriter(int width, int height, AVRational time_base) {
     stream->codecpar->height = height;
     stream->codecpar->format = codecCtx->pix_fmt;
     stream->time_base = time_base;
-
+    
+    AVDictionary *opts = NULL;
+    avcodec_open2(codecCtx, codec, &opts);
+    
+    if (avcodec_parameters_from_context(stream->codecpar, codecCtx) < 0) {
+        std::cerr << "Failed to copy codec parameters" << std::endl;
+        return false;
+    }
     avio_open(&formatCtx->pb, filePath, AVIO_FLAG_WRITE);
     return !avformat_write_header(formatCtx, nullptr);
 }
 
 bool VideoWriter::WriterVideoFrame(AVFrame *frame, int64_t pts) {
+    frame->pts = pts;
     int ret = avcodec_send_frame(codecCtx, frame);
     while (ret >= 0) {
         AVPacket *pkt = av_packet_alloc();
         ret = avcodec_receive_packet(codecCtx, pkt);
-        if (ret == AVERROR(EAGAIN)) {
+        if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
             std::cout << "encodeRet:" << ret << std::endl;
             av_packet_unref(pkt);
             av_packet_free(&pkt);
@@ -58,11 +65,10 @@ bool VideoWriter::WriterVideoFrame(AVFrame *frame, int64_t pts) {
             av_packet_free(&pkt);
             break;
         }
-        pkt->pts = pts;
-        pkt->time_base = frame->time_base;
         av_interleaved_write_frame(formatCtx, pkt);
         av_packet_unref(pkt);
         av_packet_free(&pkt);
+        break;
     }
     
     return true;

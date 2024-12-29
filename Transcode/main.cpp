@@ -11,7 +11,7 @@
 int main(int argc, const char * argv[]) {
     // insert code here...
     ConvertWork *work = new ConvertWork();
-    work->Convert("/Users/liudongxu/Downloads/11111.MP4", "/Users/liudongxu/11111.mp4", 0, 10000000);
+    work->Convert("/Users/liudongxu/金晨卜卦.mp4", "/Users/liudongxu/11111.mp4", 0, 30000000);
     work->Start();
     while (true) {
         sleep(1);
