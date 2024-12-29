@@ -46,7 +46,7 @@ bool VideoWriter::StartFileWriter(int width, int height, AVRational time_base) {
         return false;
     }
     avio_open(&formatCtx->pb, filePath, AVIO_FLAG_WRITE);
-    return !avformat_write_header(formatCtx, nullptr);
+    return avformat_write_header(formatCtx, nullptr) >= 0;
 }
 
 bool VideoWriter::WriterVideoFrame(AVFrame *frame, int64_t pts) {
